@@ -32,36 +32,37 @@ export default function ConsultationModal() {
   );
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-black/60 flex items-center justify-center p-4 animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-black/60 flex items-center justify-center p-3 sm:p-4 animate-in fade-in duration-200">
       <div 
-        className="relative bg-white w-full max-w-lg rounded-3xl shadow-2xl border border-[#e5e1d5] overflow-hidden my-8"
+        className="relative bg-white w-full max-w-lg rounded-2xl sm:rounded-3xl shadow-2xl border border-[#e5e1d5] overflow-hidden my-4 sm:my-8"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="p-5 border-b border-[#e5e1d5] flex items-center justify-between bg-[#faf9f5]">
+        <div className="p-4 sm:p-5 border-b border-[#e5e1d5] flex items-center justify-between bg-[#faf9f5]">
           <div className="flex items-center gap-2">
             <LineChart className="w-5 h-5 text-[#2d6a4f]" strokeWidth={1.75} />
-            <h3 className="font-extrabold text-stone-900 text-lg">
+            <h3 className="font-extrabold text-stone-900 text-base sm:text-lg">
               Agribusiness Consultation & Training
             </h3>
           </div>
           <button
             type="button"
             onClick={() => setIsConsultationOpen(false)}
-            className="p-1.5 rounded-full hover:bg-stone-200 text-stone-500 hover:text-stone-900 cursor-pointer"
+            className="min-w-[40px] min-h-[40px] flex items-center justify-center p-1.5 rounded-full hover:bg-stone-200 text-stone-500 hover:text-stone-900 cursor-pointer"
+            aria-label="Close modal"
           >
             <X className="w-5 h-5" strokeWidth={1.75} />
           </button>
         </div>
 
         {/* Content */}
-        <div className="p-6">
+        <div className="p-4 xs:p-6">
           {submitted ? (
-            <div className="text-center py-8 space-y-4">
-              <div className="w-14 h-14 rounded-full bg-[#d8f3dc] text-[#1b4332] flex items-center justify-center mx-auto">
-                <CheckCircle2 className="w-8 h-8 text-[#2d6a4f]" strokeWidth={1.75} />
+            <div className="text-center py-6 sm:py-8 space-y-3 sm:space-y-4">
+              <div className="w-12 h-12 xs:w-14 xs:h-14 rounded-full bg-[#d8f3dc] text-[#1b4332] flex items-center justify-center mx-auto">
+                <CheckCircle2 className="w-7 h-7 xs:w-8 xs:h-8 text-[#2d6a4f]" strokeWidth={1.75} />
               </div>
-              <h3 className="text-xl font-bold text-stone-900">Consultation Booked</h3>
+              <h3 className="text-lg xs:text-xl font-bold text-stone-900">Consultation Booked</h3>
               <p className="text-xs sm:text-sm text-stone-600 max-w-sm mx-auto font-normal">
                 Our lead agronomist will reach out via WhatsApp at <strong className="text-stone-900 tabular-nums">{formData.phone}</strong> to confirm your appointment.
               </p>
@@ -70,22 +71,22 @@ export default function ConsultationModal() {
                   href={`https://wa.me/2348060551016?text=${whatsappMessage}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-5 py-2.5 rounded-xl bg-[#25d366] text-white font-bold text-xs shadow-sm inline-flex items-center justify-center gap-2 hover:bg-[#20ba5a]"
+                  className="min-h-[44px] px-5 py-2.5 rounded-xl bg-[#25d366] text-white font-bold text-xs shadow-sm inline-flex items-center justify-center gap-2 hover:bg-[#20ba5a] w-full"
                 >
-                  <Phone className="w-4 h-4" strokeWidth={1.75} />
+                  <Phone className="w-4 h-4 shrink-0" strokeWidth={1.75} />
                   <span>Connect with Agronomist on WhatsApp</span>
                 </a>
                 <button
                   type="button"
                   onClick={() => setIsConsultationOpen(false)}
-                  className="px-5 py-2.5 rounded-xl bg-stone-100 text-stone-800 font-semibold text-xs hover:bg-stone-200 cursor-pointer"
+                  className="min-h-[44px] px-5 py-2.5 rounded-xl bg-stone-100 text-stone-800 font-semibold text-xs hover:bg-stone-200 cursor-pointer"
                 >
                   Close
                 </button>
               </div>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-3.5 sm:space-y-4">
               <p className="text-xs text-stone-600 leading-relaxed font-normal">
                 Consult directly with our agricultural specialists on castor plantation establishment, oil expeller calibration, and crop density optimization.
               </p>
@@ -98,11 +99,11 @@ export default function ConsultationModal() {
                   placeholder="e.g. Samuel Olatunji"
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full bg-[#faf9f5] border border-[#e5e1d5] rounded-xl px-3 py-2 text-xs text-stone-900 focus:outline-hidden focus:border-[#1b4332]"
+                  className="w-full min-h-[42px] bg-[#faf9f5] border border-[#e5e1d5] rounded-xl px-3 py-2 text-xs sm:text-sm text-stone-900 focus:outline-hidden focus:border-[#1b4332]"
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="block text-xs font-semibold text-stone-700 mb-1">Phone (WhatsApp)</label>
                   <input
@@ -111,7 +112,7 @@ export default function ConsultationModal() {
                     placeholder="0806 055 1016"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full bg-[#faf9f5] border border-[#e5e1d5] rounded-xl px-3 py-2 text-xs text-stone-900 tabular-nums focus:outline-hidden focus:border-[#1b4332]"
+                    className="w-full min-h-[42px] bg-[#faf9f5] border border-[#e5e1d5] rounded-xl px-3 py-2 text-xs sm:text-sm text-stone-900 tabular-nums focus:outline-hidden focus:border-[#1b4332]"
                   />
                 </div>
                 <div>
@@ -122,7 +123,7 @@ export default function ConsultationModal() {
                     placeholder="farmer@domain.com"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full bg-[#faf9f5] border border-[#e5e1d5] rounded-xl px-3 py-2 text-xs text-stone-900 focus:outline-hidden focus:border-[#1b4332]"
+                    className="w-full min-h-[42px] bg-[#faf9f5] border border-[#e5e1d5] rounded-xl px-3 py-2 text-xs sm:text-sm text-stone-900 focus:outline-hidden focus:border-[#1b4332]"
                   />
                 </div>
               </div>
@@ -132,7 +133,7 @@ export default function ConsultationModal() {
                 <select
                   value={formData.topic}
                   onChange={(e) => setFormData({ ...formData, topic: e.target.value })}
-                  className="w-full bg-[#faf9f5] border border-[#e5e1d5] rounded-xl px-3 py-2 text-xs text-stone-900 focus:outline-hidden focus:border-[#1b4332]"
+                  className="w-full min-h-[42px] bg-[#faf9f5] border border-[#e5e1d5] rounded-xl px-3 py-2 text-xs sm:text-sm text-stone-900 focus:outline-hidden focus:border-[#1b4332]"
                 >
                   <option value="Castor Plantation Setup & Outgrower Farming">Castor Plantation Setup & Seed Sourcing</option>
                   <option value="Commercial Grain Farming (Maize/Soybeans)">Commercial Grain Farming (Maize / Soybeans)</option>
@@ -141,13 +142,13 @@ export default function ConsultationModal() {
                 </select>
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="block text-xs font-semibold text-stone-700 mb-1">Format</label>
                   <select
                     value={formData.format}
                     onChange={(e) => setFormData({ ...formData, format: e.target.value })}
-                    className="w-full bg-[#faf9f5] border border-[#e5e1d5] rounded-xl px-3 py-2 text-xs text-stone-900 focus:outline-hidden focus:border-[#1b4332]"
+                    className="w-full min-h-[42px] bg-[#faf9f5] border border-[#e5e1d5] rounded-xl px-3 py-2 text-xs sm:text-sm text-stone-900 focus:outline-hidden focus:border-[#1b4332]"
                   >
                     <option value="Virtual (WhatsApp / Zoom)">Virtual (WhatsApp / Zoom)</option>
                     <option value="In-Person at TIC Ado-Ekiti">In-Person at TIC Ado-Ekiti</option>
@@ -161,7 +162,7 @@ export default function ConsultationModal() {
                     required
                     value={formData.date}
                     onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-                    className="w-full bg-[#faf9f5] border border-[#e5e1d5] rounded-xl px-3 py-2 text-xs text-stone-900 tabular-nums focus:outline-hidden focus:border-[#1b4332]"
+                    className="w-full min-h-[42px] bg-[#faf9f5] border border-[#e5e1d5] rounded-xl px-3 py-2 text-xs sm:text-sm text-stone-900 tabular-nums focus:outline-hidden focus:border-[#1b4332]"
                   />
                 </div>
               </div>
@@ -173,14 +174,14 @@ export default function ConsultationModal() {
                   placeholder="e.g. Planning to cultivate 5 hectares of castor beans in Ekiti..."
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="w-full bg-[#faf9f5] border border-[#e5e1d5] rounded-xl px-3 py-2 text-xs text-stone-900 focus:outline-hidden focus:border-[#1b4332]"
+                  className="w-full bg-[#faf9f5] border border-[#e5e1d5] rounded-xl px-3 py-2 text-xs sm:text-sm text-stone-900 focus:outline-hidden focus:border-[#1b4332]"
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full py-3.5 rounded-xl bg-[#1b4332] hover:bg-[#2d6a4f] active:scale-[0.98] text-white font-bold text-xs uppercase tracking-wider shadow-sm transition-all cursor-pointer flex items-center justify-center gap-2"
+                className="w-full min-h-[48px] py-3.5 rounded-xl bg-[#1b4332] hover:bg-[#2d6a4f] active:scale-[0.98] text-white font-bold text-xs uppercase tracking-wider shadow-sm transition-all cursor-pointer flex items-center justify-center gap-2"
               >
                 {isSubmitting ? (
                   <>

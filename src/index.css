@@ -1,5 +1,22 @@
 @import "tailwindcss";
 
+@theme {
+  /* Standardized Breakpoint System matching requested ranges:
+     • Small mobile: 320px – 374px (base / default)
+     • Standard mobile: 375px – 479px (xs)
+     • Large mobile: 480px – 767px (sm)
+     • Tablet: 768px – 1023px (md)
+     • Laptop: 1024px – 1279px (lg)
+     • Desktop: 1280px and above (xl)
+  */
+  --breakpoint-xs: 375px;
+  --breakpoint-sm: 480px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1440px;
+}
+
 @layer base {
   :root {
     --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -15,10 +32,18 @@
     --color-text-muted: #57534e;
   }
 
+  html {
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
   body {
     font-family: var(--font-sans);
     color: var(--color-text-main);
     background-color: var(--color-surface);
+    overflow-x: hidden;
+    width: 100%;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
@@ -33,6 +58,11 @@
   .tabular-nums {
     font-variant-numeric: tabular-nums;
     font-feature-settings: 'tnum' 1;
+  }
+
+  /* Touch control enhancement for mobile devices */
+  button, a, input, select, textarea {
+    touch-action: manipulation;
   }
 }
 
@@ -51,8 +81,8 @@
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
   background: #f4f1ea;

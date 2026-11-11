@@ -37,25 +37,26 @@ export default function ProductModal() {
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-black/60 flex items-center justify-center p-4 animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-black/60 flex items-center justify-center p-3 sm:p-4 animate-in fade-in duration-200">
       <div 
-        className="relative bg-white w-full max-w-4xl rounded-3xl shadow-2xl border border-[#e5e1d5] overflow-hidden my-8 max-h-[90vh] flex flex-col"
+        className="relative bg-white w-full max-w-4xl rounded-2xl sm:rounded-3xl shadow-2xl border border-[#e5e1d5] overflow-hidden my-4 sm:my-8 max-h-[92vh] flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close Button */}
         <button
           type="button"
           onClick={() => setQuickViewProduct(null)}
-          className="absolute top-4 right-4 z-10 p-2 rounded-full bg-white/90 hover:bg-white text-stone-700 hover:text-stone-950 shadow-md transition-all cursor-pointer"
+          className="absolute top-3 right-3 sm:top-4 sm:right-4 z-10 min-w-[40px] min-h-[40px] flex items-center justify-center p-2 rounded-full bg-white/90 hover:bg-white text-stone-700 hover:text-stone-950 shadow-md transition-all cursor-pointer"
+          aria-label="Close product view"
         >
           <X className="w-5 h-5" strokeWidth={1.75} />
         </button>
 
-        <div className="overflow-y-auto p-6 sm:p-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+        <div className="overflow-y-auto p-4 xs:p-6 sm:p-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 items-start">
             
             {/* Left: Product Image & Extraction Specs */}
-            <div className="space-y-4">
+            <div className="space-y-3.5 sm:space-y-4">
               <div className="aspect-square w-full rounded-xl overflow-hidden bg-[#f7f5ef] border border-[#e5e1d5] relative">
                 <img
                   src={quickViewProduct.image}
@@ -66,7 +67,7 @@ export default function ProductModal() {
 
               {/* Extraction Specs */}
               {quickViewProduct.specs && (
-                <div className="bg-[#faf9f5] p-4 rounded-xl border border-[#e5e1d5] text-xs space-y-2">
+                <div className="bg-[#faf9f5] p-3.5 sm:p-4 rounded-xl border border-[#e5e1d5] text-xs space-y-2">
                   <div className="font-bold text-stone-900 uppercase tracking-wider border-b border-[#e5e1d5] pb-1">
                     Quality & Extraction Specs
                   </div>
@@ -81,12 +82,12 @@ export default function ProductModal() {
             </div>
 
             {/* Right: Product Details & Purchase Form */}
-            <div className="space-y-5">
+            <div className="space-y-4 sm:space-y-5">
               <div>
                 <span className="text-xs font-semibold text-stone-500">
                   {quickViewProduct.category}
                 </span>
-                <h2 className="text-2xl sm:text-3xl font-extrabold text-[#143224] mt-1">
+                <h2 className="text-xl xs:text-2xl sm:text-3xl font-extrabold text-[#143224] mt-1 leading-tight">
                   {quickViewProduct.name}
                 </h2>
                 <div className="flex items-center gap-2 mt-2">
@@ -100,7 +101,7 @@ export default function ProductModal() {
                 </div>
               </div>
 
-              <p className="text-sm text-stone-700 leading-relaxed font-normal">
+              <p className="text-xs sm:text-sm text-stone-700 leading-relaxed font-normal">
                 {quickViewProduct.description}
               </p>
 
@@ -128,25 +129,25 @@ export default function ProductModal() {
                 </div>
               )}
 
-              {/* Variant Selector */}
+              {/* Variant Selector: Touch friendly buttons */}
               <div className="space-y-2">
                 <div className="flex justify-between items-center text-xs">
                   <span className="font-bold text-stone-900">Select Volume</span>
                   <span className="text-stone-500 font-medium tabular-nums">{selectedVariant.stock} in stock</span>
                 </div>
-                <div className="grid grid-cols-3 gap-2">
+                <div className="grid grid-cols-2 xs:grid-cols-3 gap-2">
                   {quickViewProduct.variants.map((v) => (
                     <button
                       key={v.size}
                       type="button"
                       onClick={() => setSelectedVariant(v)}
-                      className={`p-2.5 rounded-lg text-xs font-semibold border transition-all text-center cursor-pointer ${
+                      className={`min-h-[44px] p-2 sm:p-2.5 rounded-lg text-xs font-semibold border transition-all text-center cursor-pointer ${
                         selectedVariant.size === v.size
                           ? 'border-[#1b4332] bg-[#1b4332] text-white shadow-xs'
                           : 'border-[#e5e1d5] bg-white text-stone-900 hover:border-stone-400'
                       }`}
                     >
-                      <div>{v.size}</div>
+                      <div className="truncate">{v.size}</div>
                       <div className="text-[11px] opacity-80 mt-0.5 tabular-nums">
                         {formatPrice(v.priceNGN)}
                       </div>
@@ -157,7 +158,7 @@ export default function ProductModal() {
 
               {/* Price & Quantity Controls */}
               <div className="pt-2 flex items-center justify-between gap-4">
-                <div className="text-2xl font-extrabold text-[#143224] tabular-nums">
+                <div className="text-xl sm:text-2xl font-extrabold text-[#143224] tabular-nums">
                   {formatPrice(selectedVariant.priceNGN * quantity)}
                 </div>
 
@@ -166,7 +167,8 @@ export default function ProductModal() {
                   <button
                     type="button"
                     onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                    className="w-8 h-8 rounded-md hover:bg-stone-100 text-stone-900 font-bold text-sm flex items-center justify-center cursor-pointer"
+                    className="w-9 h-9 min-w-[36px] min-h-[36px] rounded-md hover:bg-stone-100 text-stone-900 font-bold text-sm flex items-center justify-center cursor-pointer"
+                    aria-label="Decrease quantity"
                   >
                     -
                   </button>
@@ -174,7 +176,8 @@ export default function ProductModal() {
                   <button
                     type="button"
                     onClick={() => setQuantity(quantity + 1)}
-                    className="w-8 h-8 rounded-md hover:bg-stone-100 text-stone-900 font-bold text-sm flex items-center justify-center cursor-pointer"
+                    className="w-9 h-9 min-w-[36px] min-h-[36px] rounded-md hover:bg-stone-100 text-stone-900 font-bold text-sm flex items-center justify-center cursor-pointer"
+                    aria-label="Increase quantity"
                   >
                     +
                   </button>
@@ -182,12 +185,12 @@ export default function ProductModal() {
               </div>
 
               {/* Actions: Primary CTA and Amber Accent CTA */}
-              <div className="grid grid-cols-2 gap-3 pt-2">
+              <div className="grid grid-cols-1 xs:grid-cols-2 gap-2.5 sm:gap-3 pt-2">
                 <button
                   type="button"
                   onClick={handleAddToCart}
                   disabled={addState === 'loading'}
-                  className={`py-3.5 px-4 rounded-xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all cursor-pointer shadow-sm ${
+                  className={`min-h-[48px] py-3.5 px-4 rounded-xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all cursor-pointer shadow-sm ${
                     addState === 'added'
                       ? 'bg-[#2d6a4f] text-white'
                       : addState === 'loading'
@@ -215,7 +218,7 @@ export default function ProductModal() {
                 <button
                   type="button"
                   onClick={handleBuyNow}
-                  className="py-3.5 px-4 rounded-xl bg-amber-600 hover:bg-amber-700 active:scale-[0.98] text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all cursor-pointer shadow-sm"
+                  className="min-h-[48px] py-3.5 px-4 rounded-xl bg-amber-600 hover:bg-amber-700 active:scale-[0.98] text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all cursor-pointer shadow-sm"
                 >
                   <span>Buy Now</span>
                   <ArrowRight className="w-4 h-4" strokeWidth={1.75} />

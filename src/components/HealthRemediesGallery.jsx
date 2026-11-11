@@ -28,35 +28,36 @@ export default function HealthRemediesGallery() {
   ];
 
   return (
-    <section className="py-16 sm:py-20 bg-[#faf9f5] border-b border-[#e5e1d5]">
+    <section className="py-12 sm:py-16 lg:py-20 bg-[#faf9f5] border-b border-[#e5e1d5]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="text-center max-w-3xl mx-auto mb-12 space-y-3">
+        <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-12 space-y-2.5 sm:space-y-3">
           <h2 
             style={{ textWrap: 'balance' }}
-            className="text-3xl sm:text-4xl font-extrabold text-[#143224] tracking-tight"
+            className="text-2xl xs:text-3xl sm:text-4xl font-extrabold text-[#143224] tracking-tight"
           >
             Therapeutic Castor Oil Guides & Clinical Infographics
           </h2>
-          <p className="text-sm sm:text-base text-stone-700 font-normal leading-relaxed">
+          <p className="text-xs xs:text-sm sm:text-base text-stone-700 font-normal leading-relaxed">
             Official educational infographics created by Labuk Agro Ltd detailing therapeutic applications, women's wellness rituals, and proper castor pack usage.
           </p>
         </div>
 
-        {/* Gallery Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* Gallery Grid: 1 col on mobile, 2 col on sm (480px), 4 col on lg (1024px) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 xs:gap-5 sm:gap-6">
           {guides.map((g, idx) => (
             <div
               key={idx}
               onClick={() => setSelectedPoster(g)}
-              className="group bg-white rounded-3xl p-4 border border-[#e5e1d5] hover:border-[#1b4332]/40 transition-all duration-300 cursor-pointer flex flex-col justify-between"
+              className="group bg-white rounded-3xl p-3.5 xs:p-4 border border-[#e5e1d5] hover:border-[#1b4332]/40 transition-all duration-300 cursor-pointer flex flex-col justify-between"
             >
               {/* Inner radius = 24px - 16px = 8px (rounded-lg) */}
-              <div className="relative aspect-3/4 rounded-lg overflow-hidden bg-[#f7f5ef] mb-3.5">
+              <div className="relative aspect-3/4 rounded-lg overflow-hidden bg-[#f7f5ef] mb-3 sm:mb-3.5">
                 <img
                   src={g.image}
                   alt={g.title}
                   className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-stone-900/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                   <span className="bg-white text-stone-900 text-xs font-bold px-3 py-1.5 rounded-full shadow-md flex items-center gap-1.5">
@@ -83,32 +84,33 @@ export default function HealthRemediesGallery() {
       {/* Poster Modal */}
       {selectedPoster && (
         <div 
-          className="fixed inset-0 z-50 overflow-y-auto bg-black/75 flex items-center justify-center p-4"
+          className="fixed inset-0 z-50 overflow-y-auto bg-black/75 flex items-center justify-center p-3 sm:p-4"
           onClick={() => setSelectedPoster(null)}
         >
           <div 
-            className="relative bg-white max-w-2xl w-full rounded-3xl overflow-hidden shadow-2xl p-6"
+            className="relative bg-white max-w-2xl w-full rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl p-4 sm:p-6"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex justify-between items-center pb-3 border-b border-[#e5e1d5] mb-4">
-              <div>
-                <h3 className="text-base sm:text-lg font-bold text-stone-900">
+            <div className="flex justify-between items-center pb-3 border-b border-[#e5e1d5] mb-3 sm:mb-4 gap-2">
+              <div className="min-w-0">
+                <h3 className="text-sm xs:text-base sm:text-lg font-bold text-stone-900 truncate">
                   {selectedPoster.title}
                 </h3>
-                <p className="text-xs text-stone-600 font-normal">
+                <p className="text-xs text-stone-600 font-normal line-clamp-1">
                   {selectedPoster.subtitle}
                 </p>
               </div>
               <button
                 type="button"
                 onClick={() => setSelectedPoster(null)}
-                className="p-1.5 rounded-full hover:bg-stone-100 text-stone-500 hover:text-stone-900 cursor-pointer"
+                className="min-w-[40px] min-h-[40px] flex items-center justify-center p-1.5 rounded-full hover:bg-stone-100 text-stone-500 hover:text-stone-900 cursor-pointer shrink-0"
+                aria-label="Close modal"
               >
                 <X className="w-5 h-5" strokeWidth={1.75} />
               </button>
             </div>
 
-            <div className="max-h-[75vh] overflow-y-auto rounded-xl">
+            <div className="max-h-[70vh] sm:max-h-[75vh] overflow-y-auto rounded-xl">
               <img
                 src={selectedPoster.image}
                 alt={selectedPoster.title}

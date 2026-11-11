@@ -24,11 +24,11 @@ export default function ProductCard({ product }) {
   return (
     <div 
       onClick={() => setQuickViewProduct(product)}
-      className="group bg-white rounded-3xl p-4 border border-[#e5e1d5] hover:border-[#1b4332]/40 hover:shadow-lg transition-all duration-300 flex flex-col justify-between cursor-pointer"
+      className="group bg-white rounded-3xl p-3.5 xs:p-4 border border-[#e5e1d5] hover:border-[#1b4332]/40 hover:shadow-lg transition-all duration-300 flex flex-col justify-between cursor-pointer w-full"
     >
       <div>
         {/* Inner radius = outer (24px) - padding (16px) = 8px (rounded-lg) */}
-        <div className="relative aspect-square w-full rounded-lg overflow-hidden bg-[#f7f5ef] mb-4">
+        <div className="relative aspect-square w-full rounded-lg overflow-hidden bg-[#f7f5ef] mb-3 sm:mb-4">
           <img 
             src={product.image} 
             alt={product.name} 
@@ -36,14 +36,14 @@ export default function ProductCard({ product }) {
             loading="lazy"
           />
 
-          {/* Quick View Button */}
+          {/* Quick View Button: Visible on hover on desktop, easy tap on touch */}
           <button 
             type="button"
             onClick={(e) => {
               e.stopPropagation();
               setQuickViewProduct(product);
             }}
-            className="absolute bottom-2.5 right-2.5 w-9 h-9 rounded-full bg-white text-stone-800 shadow-md hover:bg-stone-50 hover:text-stone-950 flex items-center justify-center transition-all opacity-0 group-hover:opacity-100"
+            className="absolute bottom-2.5 right-2.5 min-w-[36px] min-h-[36px] rounded-full bg-white text-stone-800 shadow-md hover:bg-stone-50 hover:text-stone-950 flex items-center justify-center transition-all opacity-90 sm:opacity-0 sm:group-hover:opacity-100"
             title="View product details"
             aria-label="Quick View"
           >
@@ -64,7 +64,7 @@ export default function ProductCard({ product }) {
             </div>
           </div>
 
-          <h3 className="font-bold text-stone-900 text-base group-hover:text-[#1b4332] transition-colors line-clamp-1">
+          <h3 className="font-bold text-stone-900 text-sm xs:text-base group-hover:text-[#1b4332] transition-colors line-clamp-1">
             {product.name}
           </h3>
 
@@ -75,8 +75,8 @@ export default function ProductCard({ product }) {
       </div>
 
       {/* Footer: Variant Pills & Price & Add to Cart */}
-      <div className="pt-4 mt-3 border-t border-[#f1efe7] space-y-3">
-        {/* Size / Variant Pills */}
+      <div className="pt-3.5 sm:pt-4 mt-3 border-t border-[#f1efe7] space-y-3">
+        {/* Size / Variant Pills: Mobile Touch Friendly */}
         <div className="flex flex-wrap gap-1.5">
           {product.variants.map((v) => (
             <button
@@ -86,7 +86,7 @@ export default function ProductCard({ product }) {
                 e.stopPropagation();
                 setSelectedVariant(v);
               }}
-              className={`text-[11px] font-semibold px-2 py-0.5 rounded-md border transition-all cursor-pointer ${
+              className={`min-h-[30px] text-[11px] font-semibold px-2 xs:px-2.5 py-1 rounded-md border transition-all cursor-pointer ${
                 selectedVariant.size === v.size
                   ? 'bg-[#1b4332] text-white border-[#1b4332]'
                   : 'bg-[#faf9f5] text-stone-700 border-[#e5e1d5] hover:border-stone-400'
@@ -99,7 +99,7 @@ export default function ProductCard({ product }) {
 
         {/* Price & Add to Cart Action */}
         <div className="flex items-center justify-between gap-2 pt-1">
-          <div className="text-lg font-extrabold text-[#143224] tabular-nums">
+          <div className="text-base xs:text-lg font-extrabold text-[#143224] tabular-nums">
             {formatPrice(selectedVariant.priceNGN)}
           </div>
 
@@ -107,7 +107,7 @@ export default function ProductCard({ product }) {
             type="button"
             onClick={handleAddToCart}
             disabled={buttonState === 'loading'}
-            className={`min-w-[84px] h-9 px-3.5 rounded-lg font-bold text-xs flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
+            className={`min-w-[84px] min-h-[38px] px-3.5 py-2 rounded-lg font-bold text-xs flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
               buttonState === 'added'
                 ? 'bg-[#2d6a4f] text-white'
                 : buttonState === 'loading'
