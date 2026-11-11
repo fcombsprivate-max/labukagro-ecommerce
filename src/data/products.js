@@ -104,33 +104,35 @@ export const PRODUCTS = [
   },
   {
     id: "labuk-natural-honey",
-    name: "Labuk Pure Raw Wild Forest Honey",
+    name: "Labuk 100% Pure Natural Honey",
     category: "Honey & Extracts",
-    tagline: "Unheated, unfiltered forest harvest with active natural enzymes",
+    tagline: "Raw, unheated apiary harvest with active bee enzymes and pure floral nectar",
     rating: 5.0,
     reviewCount: 142,
     badge: null,
-    image: "/images/IMG-20261106-WA0035.jpg",
+    image: "/images/labuk-natural-honey-1l.jpg",
     secondaryImages: [
-      "https://labukagro.com/wp-content/uploads/2024/12/aa183f3c-ed01-422e-9db3-d62a799a6b08.jpg"
+      "/images/IMG-20261106-WA0035.jpg"
     ],
-    description: "Harvested sustainably from natural forest reserves across Ekiti State. Kept completely raw and unpasteurized to safeguard live bee enzymes, propolis traces, wildflower pollen, and natural antimicrobial benefits. Zero artificial syrup, corn sugar, or heat degradation.",
+    description: "Harvested directly from Labuk Agro's own managed apiary in Ekiti State. 100% pure, natural, and unprocessed honey bottled in 1-Litre containers with zero sugar dilution, corn syrup, or artificial additives. Retains natural bee enzymes, wildflower pollen, and therapeutic vitality.",
     benefits: [
-      "100% pure raw wild bee honey with zero corn syrup or sugar dilution",
-      "Soothes throat irritation, dry coughs, and digestive inflammation",
-      "Nutrient-dense natural sweetener rich in floral micronutrients",
-      "Direct from local Ekiti beekeepers supported by the Labuk outgrower program"
+      "100% pure natural honey harvested from Labuk Agro's dedicated apiary",
+      "Zero corn syrup, artificial coloring, or sugar adulteration",
+      "Soothes dry coughs, throat irritation, and supports gut digestive health",
+      "Natural energy booster rich in floral bio-flavonoids and trace minerals",
+      "Supplied in sealed food-grade 1-Litre bottles direct from our apiary"
     ],
-    usage: "Take 1 to 2 tablespoons daily with warm lemon water, herbal tea, or as a natural wholesome sweetener in meals.",
+    usage: "Take 1 to 2 tablespoons daily on an empty stomach with warm water or herbal tea, or drizzle as a natural wholesome sweetener.",
     specs: {
-      harvest: "Ekiti Forest Reserve Wild Harvest",
-      moisture: "Under 18% Natural Density",
-      purity: "Laboratory Tested Raw Bee Honey"
+      volume: "1 Litre (1Ltr) Bottle",
+      source: "Labuk Agro Dedicated Apiary, Ekiti",
+      purity: "100% Pure Unadulterated Bee Honey",
+      moisture: "Under 18% Natural Density"
     },
     variants: [
-      { size: "500ml Jar", priceNGN: 6500, stock: 40 },
-      { size: "1 Litre Bottle", priceNGN: 12000, stock: 50 },
-      { size: "5 Litres Bulk Tub", priceNGN: 55000, stock: 15 }
+      { size: "1 Litre Bottle", priceNGN: 8000, stock: 50 },
+      { size: "500ml Bottle", priceNGN: 4500, stock: 40 },
+      { size: "5 Litres Bulk Tub", priceNGN: 38000, stock: 15 }
     ]
   },
   {
@@ -146,23 +148,26 @@ export const PRODUCTS = [
       "/images/IMG-20261106-WA0038.jpg",
       "/images/IMG-20261106-WA0043.jpg"
     ],
-    description: "Carefully graded hybrid castor bean seeds (Ricinus communis) harvested from Labuk Agro's managed mother plantations in Ekiti. Bred specifically for high oil recovery (>48%) and robust drought tolerance in tropical soils.",
+    description: "Carefully graded hybrid castor bean seeds (Ricinus communis) harvested from Labuk Agro's managed plantations in Ekiti. Bred specifically for high oil recovery (>48%) and robust drought tolerance in tropical soils.",
     benefits: [
       "High germination rate exceeding 88% under standard soil conditions",
       "High oil recovery rate (>48%) for commercial cold press expellers",
-      "Includes agronomic plant spacing and soil management guidelines from Labuk Agro"
+      "Supplied at ₦10,000 per kg with planting spacing and soil management guidelines"
     ],
     usage: "Commercial plantation establishment, contract outgrower schemes, and industrial seed aggregation.",
     specs: {
       variety: "Hybrid High-Yield Ricinus communis",
       germination: ">= 88% Verified Rate",
       oilYield: ">= 48% Expeller Extraction",
+      pricePerKg: "₦10,000 / kg",
       origin: "Labuk Agro Seed Farm, Ekiti"
     },
     variants: [
-      { size: "5kg Seed Pack", priceNGN: 12000, stock: 50 },
-      { size: "25kg Bag", priceNGN: 45000, stock: 30 },
-      { size: "50kg Sack", priceNGN: 85000, stock: 20 }
+      { size: "1kg Seed Pack", priceNGN: 10000, stock: 60 },
+      { size: "5kg Seed Pack", priceNGN: 50000, stock: 40 },
+      { size: "10kg Bag", priceNGN: 100000, stock: 25 },
+      { size: "25kg Bag", priceNGN: 250000, stock: 15 },
+      { size: "50kg Sack", priceNGN: 500000, stock: 10 }
     ]
   },
   {
