@@ -38,11 +38,11 @@ function StoreLayout() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#faf9f5] text-[#1c241d] relative">
+    <div className="min-h-screen flex flex-col bg-[#faf9f5] text-stone-900 relative">
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed top-20 right-6 z-50 bg-[#1b4332] text-white px-4 py-3 rounded-2xl shadow-2xl border border-[#52b788]/40 flex items-center gap-3 animate-in slide-in-from-top-4 duration-300">
-          <CheckCircle2 className="w-5 h-5 text-[#52b788] shrink-0" />
+        <div className="fixed top-20 right-6 z-50 bg-[#1b4332] text-white px-4 py-3 rounded-2xl shadow-xl border border-emerald-500/30 flex items-center gap-3 animate-in slide-in-from-top-4 duration-300">
+          <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" strokeWidth={1.75} />
           <span className="text-xs sm:text-sm font-semibold">{toastMessage}</span>
         </div>
       )}
@@ -61,7 +61,7 @@ function StoreLayout() {
         onWholesaleClick={handleWholesaleClick}
       />
 
-      {/* 2-Column Signature Banners */}
+      {/* Signature Highlight Banners */}
       <HighlightBanners onShopCastorClick={handleShopCastorClick} />
 
       {/* E-Commerce Product Catalog */}
@@ -93,7 +93,7 @@ function StoreLayout() {
       />
 
       {/* Extreme End Notice */}
-      <div className="bg-[#0b1c15] text-[#9ca3af] py-3.5 px-4 text-center text-xs sm:text-sm font-medium border-t border-white/10 tracking-wide">
+      <div className="bg-[#0b1c15] text-stone-400 py-3.5 px-4 text-center text-xs sm:text-sm font-medium border-t border-white/10 tracking-wide">
         An LTC technologies demo website this isn't live and shouldn't be treated as such
       </div>
 

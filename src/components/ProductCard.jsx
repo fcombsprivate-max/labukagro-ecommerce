@@ -1,42 +1,40 @@
 import React, { useState } from 'react';
 import { useCart } from '../context/CartContext';
-import { Star, ShoppingCart, Eye, Check } from 'lucide-react';
+import { Star, ShoppingCart, Eye, Check, Loader2 } from 'lucide-react';
 
 export default function ProductCard({ product }) {
   const { addToCart, formatPrice, setQuickViewProduct } = useCart();
   const [selectedVariant, setSelectedVariant] = useState(product.variants[0]);
-  const [addedAnim, setAddedAnim] = useState(false);
+  const [buttonState, setButtonState] = useState('idle'); // 'idle' | 'loading' | 'added'
 
   const handleAddToCart = (e) => {
     e.stopPropagation();
-    addToCart(product, selectedVariant, 1);
-    setAddedAnim(true);
-    setTimeout(() => setAddedAnim(false), 1200);
+    if (buttonState !== 'idle') return;
+    
+    setButtonState('loading');
+    setTimeout(() => {
+      addToCart(product, selectedVariant, 1);
+      setButtonState('added');
+      setTimeout(() => {
+        setButtonState('idle');
+      }, 1200);
+    }, 280);
   };
 
   return (
     <div 
       onClick={() => setQuickViewProduct(product)}
-      className="group bg-white rounded-3xl p-4 sm:p-5 border border-[#e8e4d9] hover:border-[#2d6a4f]/50 hover:shadow-xl transition-all duration-300 flex flex-col justify-between cursor-pointer relative"
+      className="group bg-white rounded-3xl p-4 border border-[#e5e1d5] hover:border-[#1b4332]/40 hover:shadow-lg transition-all duration-300 flex flex-col justify-between cursor-pointer"
     >
       <div>
-        {/* Image Container with Badges */}
-        <div className="relative aspect-square w-full rounded-2xl overflow-hidden bg-[#f4f2e9] mb-4">
+        {/* Inner radius = outer (24px) - padding (16px) = 8px (rounded-lg) */}
+        <div className="relative aspect-square w-full rounded-lg overflow-hidden bg-[#f7f5ef] mb-4">
           <img 
             src={product.image} 
             alt={product.name} 
             className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
             loading="lazy"
           />
-          
-          {/* Top badges */}
-          <div className="absolute top-2.5 left-2.5 flex flex-col gap-1 items-start">
-            {product.badge && (
-              <span className="bg-[#1b4332] text-white text-[10px] sm:text-[11px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider shadow-xs">
-                {product.badge}
-              </span>
-            )}
-          </div>
 
           {/* Quick View Button */}
           <button 
@@ -45,37 +43,38 @@ export default function ProductCard({ product }) {
               e.stopPropagation();
               setQuickViewProduct(product);
             }}
-            className="absolute bottom-2.5 right-2.5 p-2 rounded-full bg-white/90 backdrop-blur-xs text-[#1b4332] shadow-md hover:bg-white hover:scale-110 transition-all opacity-0 group-hover:opacity-100"
-            title="Quick View Details"
+            className="absolute bottom-2.5 right-2.5 w-9 h-9 rounded-full bg-white text-stone-800 shadow-md hover:bg-stone-50 hover:text-stone-950 flex items-center justify-center transition-all opacity-0 group-hover:opacity-100"
+            title="View product details"
+            aria-label="Quick View"
           >
-            <Eye className="w-4 h-4" />
+            <Eye className="w-4 h-4" strokeWidth={1.75} />
           </button>
         </div>
 
-        {/* Content */}
+        {/* Product Details */}
         <div className="space-y-1.5">
           <div className="flex items-center justify-between text-xs">
-            <span className="font-semibold text-[#52796f] uppercase tracking-wider text-[11px]">
+            <span className="font-semibold text-stone-600 text-[11px]">
               {product.category}
             </span>
-            <div className="flex items-center gap-1 text-[#d97706]">
-              <Star className="w-3.5 h-3.5 fill-current" />
-              <span className="font-bold text-[#1c241d] text-xs">{product.rating}</span>
-              <span className="text-[#8d99ae] text-[10px]">({product.reviewCount})</span>
+            <div className="flex items-center gap-1 text-amber-500">
+              <Star className="w-3.5 h-3.5 fill-current" strokeWidth={1.75} />
+              <span className="font-bold text-stone-900 text-xs tabular-nums">{product.rating}</span>
+              <span className="text-stone-500 text-[11px] tabular-nums">({product.reviewCount})</span>
             </div>
           </div>
 
-          <h3 className="font-bold text-[#1b4332] text-base sm:text-lg group-hover:text-[#2d6a4f] transition-colors line-clamp-1">
+          <h3 className="font-bold text-stone-900 text-base group-hover:text-[#1b4332] transition-colors line-clamp-1">
             {product.name}
           </h3>
 
-          <p className="text-xs text-[#52796f] font-medium line-clamp-1">
+          <p className="text-xs text-stone-600 font-normal line-clamp-2 leading-relaxed">
             {product.tagline}
           </p>
         </div>
       </div>
 
-      {/* Footer: Variant Selector & Price & Add to Cart */}
+      {/* Footer: Variant Pills & Price & Add to Cart */}
       <div className="pt-4 mt-3 border-t border-[#f1efe7] space-y-3">
         {/* Size / Variant Pills */}
         <div className="flex flex-wrap gap-1.5">
@@ -87,10 +86,10 @@ export default function ProductCard({ product }) {
                 e.stopPropagation();
                 setSelectedVariant(v);
               }}
-              className={`text-[11px] font-bold px-2 py-0.5 rounded-md border transition-all cursor-pointer ${
+              className={`text-[11px] font-semibold px-2 py-0.5 rounded-md border transition-all cursor-pointer ${
                 selectedVariant.size === v.size
                   ? 'bg-[#1b4332] text-white border-[#1b4332]'
-                  : 'bg-[#faf9f5] text-[#52796f] border-[#e5e1d5] hover:border-[#1b4332]'
+                  : 'bg-[#faf9f5] text-stone-700 border-[#e5e1d5] hover:border-stone-400'
               }`}
             >
               {v.size}
@@ -98,32 +97,36 @@ export default function ProductCard({ product }) {
           ))}
         </div>
 
-        {/* Price & Action */}
+        {/* Price & Add to Cart Action */}
         <div className="flex items-center justify-between gap-2 pt-1">
-          <div>
-            <div className="text-[10px] text-[#52796f] font-semibold uppercase tracking-wider">Price</div>
-            <div className="text-base sm:text-lg font-extrabold text-[#1b4332]">
-              {formatPrice(selectedVariant.priceNGN)}
-            </div>
+          <div className="text-lg font-extrabold text-[#143224] tabular-nums">
+            {formatPrice(selectedVariant.priceNGN)}
           </div>
 
           <button
             type="button"
             onClick={handleAddToCart}
-            className={`px-3.5 py-2 rounded-xl font-bold text-xs flex items-center gap-1.5 transition-all shadow-xs cursor-pointer ${
-              addedAnim 
-                ? 'bg-[#2d6a4f] text-white scale-95' 
-                : 'bg-[#1b4332] text-white hover:bg-[#2d6a4f] hover:shadow-md'
+            disabled={buttonState === 'loading'}
+            className={`min-w-[84px] h-9 px-3.5 rounded-lg font-bold text-xs flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
+              buttonState === 'added'
+                ? 'bg-[#2d6a4f] text-white'
+                : buttonState === 'loading'
+                ? 'bg-[#1b4332]/80 text-white cursor-wait'
+                : 'bg-[#1b4332] text-white hover:bg-[#2d6a4f] active:scale-[0.98] shadow-xs'
             }`}
           >
-            {addedAnim ? (
+            {buttonState === 'loading' && (
+              <Loader2 className="w-3.5 h-3.5 animate-spin" strokeWidth={2} />
+            )}
+            {buttonState === 'added' && (
               <>
-                <Check className="w-4 h-4" />
+                <Check className="w-3.5 h-3.5" strokeWidth={2} />
                 <span>Added!</span>
               </>
-            ) : (
+            )}
+            {buttonState === 'idle' && (
               <>
-                <ShoppingCart className="w-3.5 h-3.5" />
+                <ShoppingCart className="w-3.5 h-3.5" strokeWidth={1.75} />
                 <span>Add</span>
               </>
             )}

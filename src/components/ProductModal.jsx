@@ -1,29 +1,33 @@
 import React, { useState, useEffect } from 'react';
 import { useCart } from '../context/CartContext';
-import { X, Star, Check, ShoppingBag, ShieldCheck, HelpCircle, Phone, ArrowRight } from 'lucide-react';
+import { X, Star, Check, ShoppingBag, ArrowRight, Loader2 } from 'lucide-react';
 
 export default function ProductModal() {
   const { quickViewProduct, setQuickViewProduct, addToCart, formatPrice, setIsCartOpen } = useCart();
   const [selectedVariant, setSelectedVariant] = useState(null);
   const [quantity, setQuantity] = useState(1);
-  const [addedSuccess, setAddedSuccess] = useState(false);
+  const [addState, setAddState] = useState('idle'); // 'idle' | 'loading' | 'added'
 
   useEffect(() => {
     if (quickViewProduct) {
       setSelectedVariant(quickViewProduct.variants[0]);
       setQuantity(1);
-      setAddedSuccess(false);
+      setAddState('idle');
     }
   }, [quickViewProduct]);
 
   if (!quickViewProduct || !selectedVariant) return null;
 
   const handleAddToCart = () => {
-    addToCart(quickViewProduct, selectedVariant, quantity);
-    setAddedSuccess(true);
+    if (addState !== 'idle') return;
+    setAddState('loading');
     setTimeout(() => {
-      setAddedSuccess(false);
-    }, 1500);
+      addToCart(quickViewProduct, selectedVariant, quantity);
+      setAddState('added');
+      setTimeout(() => {
+        setAddState('idle');
+      }, 1200);
+    }, 280);
   };
 
   const handleBuyNow = () => {
@@ -33,45 +37,43 @@ export default function ProductModal() {
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-black/60 flex items-center justify-center p-4 animate-in fade-in duration-200">
       <div 
         className="relative bg-white w-full max-w-4xl rounded-3xl shadow-2xl border border-[#e5e1d5] overflow-hidden my-8 max-h-[90vh] flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close Button */}
         <button
+          type="button"
           onClick={() => setQuickViewProduct(null)}
-          className="absolute top-4 right-4 z-10 p-2 rounded-full bg-white/80 hover:bg-white text-gray-700 hover:text-black shadow-md transition-all cursor-pointer"
+          className="absolute top-4 right-4 z-10 p-2 rounded-full bg-white/90 hover:bg-white text-stone-700 hover:text-stone-950 shadow-md transition-all cursor-pointer"
         >
-          <X className="w-5 h-5" />
+          <X className="w-5 h-5" strokeWidth={1.75} />
         </button>
 
         <div className="overflow-y-auto p-6 sm:p-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
             
-            {/* Left: Product Image & Cert Badges */}
+            {/* Left: Product Image & Extraction Specs */}
             <div className="space-y-4">
-              <div className="aspect-square w-full rounded-2xl overflow-hidden bg-[#f4f2e9] border border-[#e8e4d9] relative">
+              <div className="aspect-square w-full rounded-xl overflow-hidden bg-[#f7f5ef] border border-[#e5e1d5] relative">
                 <img
                   src={quickViewProduct.image}
                   alt={quickViewProduct.name}
                   className="w-full h-full object-cover object-center"
                 />
-                <span className="absolute top-3 left-3 bg-[#1b4332] text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">
-                  {quickViewProduct.badge || "Verified Pure"}
-                </span>
               </div>
 
-              {/* Technical Specifications */}
+              {/* Extraction Specs */}
               {quickViewProduct.specs && (
-                <div className="bg-[#faf9f5] p-4 rounded-2xl border border-[#e5e1d5] text-xs space-y-2">
-                  <div className="font-bold text-[#1b4332] uppercase tracking-wider border-b border-[#e5e1d5] pb-1">
+                <div className="bg-[#faf9f5] p-4 rounded-xl border border-[#e5e1d5] text-xs space-y-2">
+                  <div className="font-bold text-stone-900 uppercase tracking-wider border-b border-[#e5e1d5] pb-1">
                     Quality & Extraction Specs
                   </div>
                   {Object.entries(quickViewProduct.specs).map(([key, val]) => (
-                    <div key={key} className="flex justify-between items-center text-[#52796f]">
-                      <span className="capitalize">{key}:</span>
-                      <span className="font-bold text-[#1c241d]">{val}</span>
+                    <div key={key} className="flex justify-between items-center text-stone-600">
+                      <span className="capitalize">{key}</span>
+                      <span className="font-semibold text-stone-900">{val}</span>
                     </div>
                   ))}
                 </div>
@@ -81,37 +83,37 @@ export default function ProductModal() {
             {/* Right: Product Details & Purchase Form */}
             <div className="space-y-5">
               <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-[#52796f]">
+                <span className="text-xs font-semibold text-stone-500">
                   {quickViewProduct.category}
                 </span>
-                <h2 className="text-2xl sm:text-3xl font-extrabold text-[#1b4332] mt-1">
+                <h2 className="text-2xl sm:text-3xl font-extrabold text-[#143224] mt-1">
                   {quickViewProduct.name}
                 </h2>
                 <div className="flex items-center gap-2 mt-2">
-                  <div className="flex items-center text-[#d97706]">
+                  <div className="flex items-center text-amber-500">
                     {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-current" />
+                      <Star key={i} className="w-4 h-4 fill-current" strokeWidth={1.75} />
                     ))}
                   </div>
-                  <span className="text-xs font-bold text-[#1c241d]">{quickViewProduct.rating}</span>
-                  <span className="text-xs text-[#8d99ae]">({quickViewProduct.reviewCount} customer reviews)</span>
+                  <span className="text-xs font-bold text-stone-900 tabular-nums">{quickViewProduct.rating}</span>
+                  <span className="text-xs text-stone-500 tabular-nums">({quickViewProduct.reviewCount} reviews)</span>
                 </div>
               </div>
 
-              <p className="text-sm text-[#405646] leading-relaxed">
+              <p className="text-sm text-stone-700 leading-relaxed font-normal">
                 {quickViewProduct.description}
               </p>
 
               {/* Key Benefits */}
               {quickViewProduct.benefits && (
                 <div className="space-y-2">
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-[#1b4332]">
-                    Key Benefits & Features:
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-stone-900">
+                    Benefits & Verification
                   </h4>
-                  <ul className="space-y-1.5 text-xs text-[#405646]">
+                  <ul className="space-y-1.5 text-xs text-stone-700">
                     {quickViewProduct.benefits.map((b, idx) => (
                       <li key={idx} className="flex items-start gap-2">
-                        <Check className="w-3.5 h-3.5 text-[#2d6a4f] shrink-0 mt-0.5" />
+                        <Check className="w-3.5 h-3.5 text-[#2d6a4f] shrink-0 mt-0.5" strokeWidth={2} />
                         <span>{b}</span>
                       </li>
                     ))}
@@ -121,30 +123,31 @@ export default function ProductModal() {
 
               {/* Usage Instructions */}
               {quickViewProduct.usage && (
-                <div className="bg-[#f1efe7] p-3 rounded-xl border border-[#e5e1d5] text-xs text-[#2d6a4f]">
-                  <strong>Recommended Usage:</strong> {quickViewProduct.usage}
+                <div className="bg-[#f4f2eb] p-3 rounded-xl border border-[#e5e1d5] text-xs text-stone-800 font-normal">
+                  <strong className="text-stone-950 font-semibold">Recommended Usage:</strong> {quickViewProduct.usage}
                 </div>
               )}
 
               {/* Variant Selector */}
               <div className="space-y-2">
                 <div className="flex justify-between items-center text-xs">
-                  <span className="font-bold text-[#1b4332] uppercase tracking-wider">Select Size / Quantity:</span>
-                  <span className="text-[#52796f]">Stock Available</span>
+                  <span className="font-bold text-stone-900">Select Volume</span>
+                  <span className="text-stone-500 font-medium tabular-nums">{selectedVariant.stock} in stock</span>
                 </div>
                 <div className="grid grid-cols-3 gap-2">
                   {quickViewProduct.variants.map((v) => (
                     <button
                       key={v.size}
+                      type="button"
                       onClick={() => setSelectedVariant(v)}
-                      className={`p-2 rounded-xl text-xs font-bold border transition-all text-center cursor-pointer ${
+                      className={`p-2.5 rounded-lg text-xs font-semibold border transition-all text-center cursor-pointer ${
                         selectedVariant.size === v.size
-                          ? 'border-[#1b4332] bg-[#1b4332] text-white shadow-sm'
-                          : 'border-[#e5e1d5] bg-white text-[#1c241d] hover:border-[#1b4332]'
+                          ? 'border-[#1b4332] bg-[#1b4332] text-white shadow-xs'
+                          : 'border-[#e5e1d5] bg-white text-stone-900 hover:border-stone-400'
                       }`}
                     >
                       <div>{v.size}</div>
-                      <div className="text-[11px] opacity-80 mt-0.5">
+                      <div className="text-[11px] opacity-80 mt-0.5 tabular-nums">
                         {formatPrice(v.priceNGN)}
                       </div>
                     </button>
@@ -154,50 +157,56 @@ export default function ProductModal() {
 
               {/* Price & Quantity Controls */}
               <div className="pt-2 flex items-center justify-between gap-4">
-                <div>
-                  <div className="text-xs text-[#52796f] font-semibold uppercase">Total Price</div>
-                  <div className="text-2xl font-extrabold text-[#1b4332]">
-                    {formatPrice(selectedVariant.priceNGN * quantity)}
-                  </div>
+                <div className="text-2xl font-extrabold text-[#143224] tabular-nums">
+                  {formatPrice(selectedVariant.priceNGN * quantity)}
                 </div>
 
                 {/* Quantity Buttons */}
-                <div className="flex items-center border border-[#e5e1d5] rounded-xl bg-white p-1">
+                <div className="flex items-center border border-[#e5e1d5] rounded-lg bg-white p-0.5">
                   <button
+                    type="button"
                     onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                    className="w-8 h-8 rounded-lg hover:bg-[#f1efe7] text-[#1b4332] font-bold text-sm flex items-center justify-center cursor-pointer"
+                    className="w-8 h-8 rounded-md hover:bg-stone-100 text-stone-900 font-bold text-sm flex items-center justify-center cursor-pointer"
                   >
                     -
                   </button>
-                  <span className="w-10 text-center font-bold text-sm text-[#1b4332]">{quantity}</span>
+                  <span className="w-9 text-center font-bold text-sm text-stone-900 tabular-nums">{quantity}</span>
                   <button
+                    type="button"
                     onClick={() => setQuantity(quantity + 1)}
-                    className="w-8 h-8 rounded-lg hover:bg-[#f1efe7] text-[#1b4332] font-bold text-sm flex items-center justify-center cursor-pointer"
+                    className="w-8 h-8 rounded-md hover:bg-stone-100 text-stone-900 font-bold text-sm flex items-center justify-center cursor-pointer"
                   >
                     +
                   </button>
                 </div>
               </div>
 
-              {/* Actions */}
+              {/* Actions: Primary CTA and Amber Accent CTA */}
               <div className="grid grid-cols-2 gap-3 pt-2">
                 <button
                   type="button"
                   onClick={handleAddToCart}
-                  className={`py-3.5 px-4 rounded-xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all cursor-pointer shadow-md ${
-                    addedSuccess
+                  disabled={addState === 'loading'}
+                  className={`py-3.5 px-4 rounded-xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all cursor-pointer shadow-sm ${
+                    addState === 'added'
                       ? 'bg-[#2d6a4f] text-white'
-                      : 'bg-[#1b4332] text-white hover:bg-[#2d6a4f]'
+                      : addState === 'loading'
+                      ? 'bg-[#1b4332]/80 text-white cursor-wait'
+                      : 'bg-[#1b4332] text-white hover:bg-[#2d6a4f] active:scale-[0.98]'
                   }`}
                 >
-                  {addedSuccess ? (
+                  {addState === 'loading' && (
+                    <Loader2 className="w-4 h-4 animate-spin" strokeWidth={2} />
+                  )}
+                  {addState === 'added' && (
                     <>
-                      <Check className="w-4 h-4" />
+                      <Check className="w-4 h-4" strokeWidth={2} />
                       <span>Added to Cart!</span>
                     </>
-                  ) : (
+                  )}
+                  {addState === 'idle' && (
                     <>
-                      <ShoppingBag className="w-4 h-4" />
+                      <ShoppingBag className="w-4 h-4" strokeWidth={1.75} />
                       <span>Add to Cart</span>
                     </>
                   )}
@@ -206,24 +215,11 @@ export default function ProductModal() {
                 <button
                   type="button"
                   onClick={handleBuyNow}
-                  className="py-3.5 px-4 rounded-xl bg-[#d97706] hover:bg-[#b45309] text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all cursor-pointer shadow-md"
+                  className="py-3.5 px-4 rounded-xl bg-amber-600 hover:bg-amber-700 active:scale-[0.98] text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all cursor-pointer shadow-sm"
                 >
                   <span>Buy Now</span>
-                  <ArrowRight className="w-4 h-4" />
+                  <ArrowRight className="w-4 h-4" strokeWidth={1.75} />
                 </button>
-              </div>
-
-              {/* WhatsApp Quick Inquiry Link */}
-              <div className="text-center pt-2">
-                <a
-                  href={`https://wa.me/2348060551016?text=Hello%20Labuk%20Agro,%20I%20have%20an%20inquiry%20regarding%20${encodeURIComponent(quickViewProduct.name)}%20(${selectedVariant.size})`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-xs text-[#2d6a4f] hover:text-[#1b4332] underline font-semibold inline-flex items-center gap-1.5"
-                >
-                  <Phone className="w-3.5 h-3.5" />
-                  <span>Ask a Question on WhatsApp about this Product</span>
-                </a>
               </div>
 
             </div>
