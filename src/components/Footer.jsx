@@ -79,7 +79,7 @@ export default function Footer({ onCategorySelect, onWholesaleClick }) {
             </div>
 
             <p className="text-xs text-emerald-200 leading-relaxed font-normal">
-              Advancing Nigerian agriculture through sustainable agro-production, certified cold-pressed oil extraction, and commodity marketing. Nature • Nurture • Sustain.
+              Operating since 2016 (inc. 2022). Advancing Nigerian agriculture through quality agro-processing (edible & external castor oils, neem oil), dedicated apiary original honey, and reliable bulk farm produce supply. Nature • Nurture • Sustain.
             </p>
 
             <div className="pt-2 text-xs space-y-2 text-emerald-200 font-normal">

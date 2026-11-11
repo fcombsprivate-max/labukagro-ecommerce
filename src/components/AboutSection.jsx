@@ -1,6 +1,6 @@
 import React from 'react';
 import { LEADERSHIP_TEAM, PILLARS } from '../data/products';
-import { CheckCircle2, Factory, MapPin } from 'lucide-react';
+import { CheckCircle2, Factory, MapPin, Calendar, Droplets, Leaf, Package } from 'lucide-react';
 
 export default function AboutSection() {
   return (
@@ -10,20 +10,50 @@ export default function AboutSection() {
         {/* Story Section */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center mb-12 sm:mb-16">
           <div className="lg:col-span-6 space-y-4 sm:space-y-5">
+            {/* Timeline Milestones Badge */}
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#f4f1ea] border border-[#e5e1d5] text-[11px] sm:text-xs font-semibold text-stone-800">
+              <Calendar className="w-3.5 h-3.5 text-[#2d6a4f]" strokeWidth={1.75} />
+              <span>Operating Since 2016 • Registered 2018 • Incorporated 2022</span>
+            </div>
+
             <h2 
               style={{ textWrap: 'balance' }}
               className="text-2xl xs:text-3xl sm:text-4xl font-extrabold text-[#143224] tracking-tight leading-tight"
             >
-              Commercial Agro-Processing at Technology Incubation Centre
+              Agricultural Processing, Dedicated Apiary & Bulk Farm Supply
             </h2>
 
             <p className="text-sm xs:text-base text-stone-700 leading-relaxed font-normal">
-              At <strong className="text-stone-900 font-semibold">Labuk Agro Ltd</strong>, we advance Nigerian agriculture through sustainable agro-production, certified cold-press processing, outgrower coordination, and regional commodity distribution.
+              Operating since 2016, registered in 2018, and formally incorporated in 2022, <strong className="text-stone-900 font-semibold">Labuk Agro Ltd</strong> is a diversified Nigerian agribusiness grounded in quality agricultural processing, 100% natural unadulterated products, and reliable, dependable supply.
             </p>
 
             <p className="text-sm xs:text-base text-stone-700 leading-relaxed font-normal">
-              Operating out of <strong className="text-stone-900 font-semibold">Unit 22, Technology Incubation Center (TIC), Ajilosun Ikere Road, Ado Ekiti</strong>, we produce NAFDAC-certified cold-pressed castor oils (edible and topical grades), virgin neem essential oil, raw forest honey, and destoned staple grains that supply both domestic food manufacturers and regional West African markets.
+              Headquartered at <strong className="text-stone-900 font-semibold">Unit 22, Technology Incubation Center (TIC), Ajilosun Ikere Road, Ado Ekiti</strong>, our agricultural operations extend across three core divisions:
             </p>
+
+            {/* Three Core Agricultural Operations */}
+            <div className="space-y-2.5 pt-1">
+              <div className="flex items-start gap-3 p-3 rounded-xl bg-[#faf9f5] border border-[#e5e1d5]">
+                <Droplets className="w-4 h-4 text-[#2d6a4f] shrink-0 mt-0.5" strokeWidth={1.75} />
+                <div className="text-xs sm:text-sm text-stone-700 leading-relaxed">
+                  <strong className="text-stone-900 font-semibold">Quality Agro-Processing:</strong> We mechanically cold-press agricultural seeds into NAFDAC-certified Castor Oil—producing both consumer-grade edible oil (for oral wellness and digestive detox) and specialized grades for external use (hair, skin, and wellness therapy)—as well as unrefined virgin Neem Oil.
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3 p-3 rounded-xl bg-[#faf9f5] border border-[#e5e1d5]">
+                <Leaf className="w-4 h-4 text-[#2d6a4f] shrink-0 mt-0.5" strokeWidth={1.75} />
+                <div className="text-xs sm:text-sm text-stone-700 leading-relaxed">
+                  <strong className="text-stone-900 font-semibold">Dedicated Apiary & Original Honey:</strong> We operate our own managed apiary, where we sustainably source, harvest, and bottle 100% pure, original honey with zero sugar dilution or artificial adulteration.
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3 p-3 rounded-xl bg-[#faf9f5] border border-[#e5e1d5]">
+                <Package className="w-4 h-4 text-[#2d6a4f] shrink-0 mt-0.5" strokeWidth={1.75} />
+                <div className="text-xs sm:text-sm text-stone-700 leading-relaxed">
+                  <strong className="text-stone-900 font-semibold">Wholesale & Bulk Supply:</strong> We supply agricultural produce in bulk quantities—including clean grains, castor seeds, soya beans, and 200L oil drums—to wholesalers, retailers, distributors, food processors, and businesses nationwide.
+                </div>
+              </div>
+            </div>
 
             <div className="pt-2 flex flex-col sm:flex-row gap-2.5 sm:gap-3 text-xs font-semibold text-stone-900">
               <div className="flex items-center gap-2 p-2.5 sm:p-3 rounded-xl bg-[#faf9f5] border border-[#e5e1d5]">
@@ -32,7 +62,7 @@ export default function AboutSection() {
               </div>
               <div className="flex items-center gap-2 p-2.5 sm:p-3 rounded-xl bg-[#faf9f5] border border-[#e5e1d5]">
                 <Factory className="w-4 h-4 text-[#2d6a4f] shrink-0" strokeWidth={1.75} />
-                <span>Certified Cold-Press Extraction Plant</span>
+                <span>Cold-Press Plant & Managed Apiaries</span>
               </div>
             </div>
           </div>

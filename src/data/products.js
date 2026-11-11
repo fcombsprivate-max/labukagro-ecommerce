@@ -211,12 +211,12 @@ export const LEADERSHIP_TEAM = [
     role: "The Woman Leading Labuk Agro Ltd",
     image: "/images/IMG-20261106-WA0023.jpg",
     farmImage: "/images/IMG-20261106-WA0036.jpg",
-    bio: "Agribusiness visionary and Founder & CEO of Labuk Agro Ltd. Under her leadership, Labuk Agro has advanced from smallholder farming into industrial-grade cold-press agro-processing at the Technology Incubation Centre in Ado-Ekiti. She represented Nigerian agribusiness at the 10th Nigeria-EU Business Forum (Global Gateway), championing sustainable value addition and rural outgrower empowerment.",
+    bio: "Agribusiness visionary and Founder & CEO of Labuk Agro Ltd. Operating since 2016, she guided the enterprise through formal registration in 2018 and incorporation in 2022. Under her direction, Labuk Agro has expanded from smallholder farming into an integrated agro-enterprise operating industrial cold-press extraction at the Technology Incubation Centre (producing both consumer-grade and external-use Castor Oil and virgin Neem Oil), managing its own apiary for pure honey, and supplying bulk agricultural produce nationwide. She represented Nigerian agribusiness at the 10th Nigeria-EU Business Forum (Global Gateway).",
     highlights: [
-      "Founder & Chief Executive Officer (CEO)",
-      "Featured Delegate at 10th Nigeria-EU Business Forum (Global Gateway)",
-      "Pioneered NAFDAC-certified cold-pressed castor & neem oil processing in Ekiti",
-      "Directly coordinates 200+ rural smallholder farmers and contract outgrowers"
+      "Founder & CEO — Leading Agricultural Operations Since 2016",
+      "Registered in 2018 and Formally Incorporated in 2022",
+      "Pioneered Certified Castor Oil (Edible & External) & Neem Processing",
+      "Manages Dedicated Apiary & Bulk Agricultural Produce Supply"
     ]
   },
   {
@@ -224,12 +224,12 @@ export const LEADERSHIP_TEAM = [
     title: "Co-Founder & Chief Operating Officer (COO)",
     role: "Second in Command",
     image: "/images/IMG-20261106-WA0042.jpg",
-    bio: "Co-founder and second in command directing operations, agricultural engineering, expeller calibration, and logistics at Labuk Agro Ltd. He oversees plantation management, commodity aggregation, laboratory quality control, and regional B2B distribution across Nigerian states and West African supply corridors.",
+    bio: "Co-founder and second in command directing operations, agricultural engineering, expeller calibration, and logistics at Labuk Agro Ltd. He oversees crop cultivation clusters, apiary hive maintenance, commodity aggregation, laboratory quality control, and reliable B2B bulk distribution to wholesalers, businesses, and industrial buyers across Nigeria and regional West African supply corridors.",
     highlights: [
-      "Second in Command & Head of Farm Operations",
-      "Oversees 100+ Hectares of Castor & Grain Cultivation Clusters",
-      "Directs Processing Quality Control at Technology Incubation Centre",
-      "Coordinates B2B Wholesale Logistics and Bulk Haulage"
+      "Second in Command & Head of Operations & Quality Control",
+      "Oversees 100+ Hectares of Crop Cultivation Clusters & Dedicated Apiary",
+      "Supervises Mechanical Cold-Press Processing at Technology Incubation Centre",
+      "Directs B2B Bulk Supply Logistics to Wholesalers & Commercial Buyers"
     ]
   }
 ];
@@ -237,39 +237,39 @@ export const LEADERSHIP_TEAM = [
 export const PILLARS = [
   {
     number: "01",
-    title: "Experienced Agronomy",
-    tagline: "Hands-on commercial farming",
-    description: "Grounded in commercial crop cultivation, contract outgrower management, and seed-to-shelf processing that empowers local farming communities."
+    title: "Established Heritage",
+    tagline: "Operating since 2016 (Inc. 2022)",
+    description: "Operating continuously since 2016, registered in 2018 and incorporated in 2022, building years of agronomic trust and dependable agricultural supply."
   },
   {
     number: "02",
-    title: "Eco-Conscious Practices",
-    tagline: "Regenerative soil stewardship",
-    description: "We practice zero-harm agriculture, avoiding destructive chemicals and protecting biodiversity across Ekiti's fertile agricultural belt."
+    title: "Quality Agro-Processing",
+    tagline: "Edible & external cold-press oils",
+    description: "State-of-the-art expellers at Unit 22 TIC extract pure Castor Oil (in both consumer-grade edible and external topical grades) and virgin Neem Oil."
   },
   {
     number: "03",
-    title: "Mechanical Cold-Pressing",
-    tagline: "Nutrient-dense extraction",
-    description: "State-of-the-art mechanical oil expellers at the Technology Incubation Centre preserve 100% of vital fatty acids, ricinoleic acid, and active enzymes."
+    title: "Dedicated Apiary",
+    tagline: "100% original raw honey",
+    description: "We operate our own dedicated apiary, ethically managing hives to harvest and produce 100% pure, natural, unadulterated honey."
   },
   {
     number: "04",
-    title: "Rigorous Quality Assurance",
-    tagline: "NAFDAC & TIC standards",
-    description: "Every production batch undergoes strict laboratory analysis to verify purity, density, low moisture, and absence of chemical adulterants."
+    title: "Reliable Bulk Supply",
+    tagline: "Wholesale & business partners",
+    description: "Supplying bulk processed oils, natural honey, and clean agricultural produce (maize, castor seeds, soya beans) to businesses and distributors."
   },
   {
     number: "05",
-    title: "Unadulterated Purity",
-    tagline: "Zero mineral oil diluents",
-    description: "We never dilute our cold-pressed oils with mineral oils or blend synthetic syrups into our honeys. Pure natural products from the soil."
+    title: "Uncompromising Purity",
+    tagline: "Zero additives or adulteration",
+    description: "Every product is lab-verified pure: no mineral oil diluents, no synthetic syrups in our honey, and zero chemical adulterants."
   },
   {
     number: "06",
-    title: "Export & Regional Reach",
-    tagline: "Nigeria & West Africa distribution",
-    description: "Serving retail households across Nigerian states and supplying bulk drums to regional manufacturers in Ghana and West Africa."
+    title: "Nationwide & Regional Reach",
+    tagline: "Reliable supply network",
+    description: "Equipped for prompt nationwide delivery across Nigerian states and containerized logistics for regional West African trade."
   }
 ];
 

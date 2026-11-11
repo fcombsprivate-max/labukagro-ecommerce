@@ -21,7 +21,7 @@ export default function Hero({ onShopClick, onWholesaleClick }) {
             </h1>
 
             <p className="text-sm xs:text-base sm:text-lg text-stone-700 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-normal">
-              Direct from <strong className="text-stone-900 font-semibold">Unit 22, Technology Incubation Center, Ado-Ekiti</strong>. Labuk Agro Ltd processes 100% hexane-free edible and topical castor oils, virgin neem seed oil in hygienic spout pouches, raw wild forest honey, and certified high-yield planting seeds.
+              Operating since 2016 from <strong className="text-stone-900 font-semibold">Unit 22, Technology Incubation Center, Ado-Ekiti</strong>. Labuk Agro Ltd specializes in quality agro-processing (NAFDAC-certified edible & external castor oils, virgin neem oil), pure original honey from our own apiary, and reliable bulk agricultural produce supply.
             </p>
 
             {/* CTAs with Mobile-First Full-Width & Desktop Inline Rhythm */}
@@ -40,7 +40,7 @@ export default function Hero({ onShopClick, onWholesaleClick }) {
                 onClick={onWholesaleClick}
                 className="w-full xs:w-auto min-h-[48px] px-5 sm:px-7 py-3.5 sm:py-4 rounded-xl bg-white text-[#1b4332] font-bold text-sm sm:text-base border border-[#e5e1d5] hover:border-[#1b4332] hover:bg-[#f5f3ec] active:scale-[0.98] transition-all cursor-pointer flex items-center justify-center"
               >
-                Wholesale Commodities
+                Wholesale & Bulk Supply
               </button>
 
               <button 
