@@ -95,19 +95,19 @@
   background: #1b4332;
 }
 
-/* Centered responsive watermark backdrop on pure white base */
+/* Responsive watermark pattern backdrop on pure white base */
 .main-watermark-wrapper {
   background-color: #ffffff;
-  background-image: linear-gradient(rgba(255, 255, 255, 0.84), rgba(255, 255, 255, 0.84)), url('/images/labuk-watermark.jpg');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 600px auto;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.88)), url('/images/labuk-watermark.jpg');
+  background-position: top center;
+  background-repeat: repeat;
+  background-size: 760px auto;
   background-attachment: fixed;
 }
 
 @media (max-width: 768px) {
   .main-watermark-wrapper {
-    background-size: 80vw auto;
+    background-size: 480px auto;
     background-attachment: scroll;
   }
 }
