@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useCart } from '../context/CartContext';
 import { ShoppingBag, Search, Phone, Menu, X } from 'lucide-react';
 
-export default function Navbar({ searchTerm, setSearchTerm, activeCategory, setActiveCategory }) {
+export default function Navbar({ searchTerm, setSearchTerm, activeCategory, setActiveCategory, onOpenTracking }) {
   const { totalItemCount, setIsCartOpen, setIsConsultationOpen } = useCart();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -124,6 +124,13 @@ export default function Navbar({ searchTerm, setSearchTerm, activeCategory, setA
           </button>
           <button 
             type="button"
+            onClick={onOpenTracking} 
+            className="hover:text-[#1b4332] transition-colors cursor-pointer py-1"
+          >
+            Track Order
+          </button>
+          <button 
+            type="button"
             onClick={() => setIsConsultationOpen(true)} 
             className="text-[#1b4332] hover:text-[#2d6a4f] transition-colors cursor-pointer font-bold py-1"
           >
@@ -205,6 +212,16 @@ export default function Navbar({ searchTerm, setSearchTerm, activeCategory, setA
               className="min-h-[44px] flex items-center px-2.5 rounded-lg active:bg-stone-200/60 hover:text-[#1b4332] transition-colors text-left"
             >
               About & Executive Leadership
+            </button>
+            <button 
+              type="button"
+              onClick={() => {
+                setMobileMenuOpen(false);
+                if (onOpenTracking) onOpenTracking();
+              }} 
+              className="min-h-[44px] flex items-center px-2.5 rounded-lg active:bg-stone-200/60 hover:text-[#1b4332] transition-colors text-left"
+            >
+              Track Order Status
             </button>
             <button 
               type="button"

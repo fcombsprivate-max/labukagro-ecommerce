@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Phone, Mail, MapPin, Send, CheckCircle2, ShieldCheck } from 'lucide-react';
 
-export default function Footer({ onCategorySelect, onWholesaleClick }) {
+export default function Footer({ onCategorySelect, onWholesaleClick, onOpenTracking, onOpenAdmin }) {
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
 
@@ -252,7 +252,23 @@ export default function Footer({ onCategorySelect, onWholesaleClick }) {
           <div className="tabular-nums">
             © {new Date().getFullYear()} Labuk Agro Ltd. All Rights Reserved. (Unit 22, TIC, Ado-Ekiti, Nigeria)
           </div>
-          <div className="flex items-center gap-3 sm:gap-4 text-emerald-200">
+          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 text-emerald-200">
+            <button 
+              type="button" 
+              onClick={onOpenTracking} 
+              className="hover:text-white transition-colors cursor-pointer"
+            >
+              Track Order
+            </button>
+            <span>•</span>
+            <button 
+              type="button" 
+              onClick={onOpenAdmin} 
+              className="hover:text-white transition-colors cursor-pointer"
+            >
+              Staff Portal
+            </button>
+            <span>•</span>
             <span>Privacy Policy</span>
             <span>•</span>
             <span>Terms of Trade</span>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { CartProvider, useCart } from './context/CartContext';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -14,12 +14,54 @@ import CartDrawer from './components/CartDrawer';
 import CheckoutModal from './components/CheckoutModal';
 import ConsultationModal from './components/ConsultationModal';
 import FloatingWhatsApp from './components/FloatingWhatsApp';
+import OrderSuccessModal from './components/OrderSuccessModal';
+import OrderTrackingModal from './components/OrderTrackingModal';
+import AdminOrdersModal from './components/AdminOrdersModal';
 import { CheckCircle2 } from 'lucide-react';
 
 function StoreLayout() {
   const [searchTerm, setSearchTerm] = useState('');
   const [activeCategory, setActiveCategory] = useState('All Products');
   const { toastMessage } = useCart();
+
+  // Payment Callback & Verification State
+  const [successRef, setSuccessRef] = useState('');
+  const [isSuccessOpen, setIsSuccessOpen] = useState(false);
+
+  // Customer Tracking Modal State
+  const [isTrackingOpen, setIsTrackingOpen] = useState(false);
+  const [trackingInitialId, setTrackingInitialId] = useState('');
+  const [trackingInitialVerify, setTrackingInitialVerify] = useState('');
+
+  // Admin Order Management State
+  const [isAdminOpen, setIsAdminOpen] = useState(false);
+
+  // Check URL parameters for Paystack payment return callback
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const ref = params.get('reference') || params.get('trxref');
+    const isCallback = params.get('payment_callback') === 'true' || !!ref;
+
+    if (ref && isCallback) {
+      setSuccessRef(ref);
+      setIsSuccessOpen(true);
+      // Clean query parameters from URL smoothly without refreshing
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+
+    const checkHash = () => {
+      const hash = window.location.hash.toLowerCase();
+      if (hash === '#admin' || hash === '#portal') {
+        setIsAdminOpen(true);
+      } else if (hash === '#track') {
+        setIsTrackingOpen(true);
+      }
+    };
+
+    checkHash();
+    window.addEventListener('hashchange', checkHash);
+    return () => window.removeEventListener('hashchange', checkHash);
+  }, []);
 
   const handleShopClick = () => {
     const el = document.getElementById('shop');
@@ -53,6 +95,7 @@ function StoreLayout() {
         setSearchTerm={setSearchTerm}
         activeCategory={activeCategory}
         setActiveCategory={setActiveCategory}
+        onOpenTracking={() => setIsTrackingOpen(true)}
       />
 
       {/* Hero Section */}
@@ -90,6 +133,8 @@ function StoreLayout() {
           handleShopClick();
         }}
         onWholesaleClick={handleWholesaleClick}
+        onOpenTracking={() => setIsTrackingOpen(true)}
+        onOpenAdmin={() => setIsAdminOpen(true)}
       />
 
       {/* Extreme End Notice */}
@@ -102,6 +147,33 @@ function StoreLayout() {
       <CartDrawer />
       <CheckoutModal />
       <ConsultationModal />
+
+      {/* Verified Payment Success Confirmation Modal */}
+      <OrderSuccessModal
+        reference={successRef}
+        isOpen={isSuccessOpen}
+        onClose={() => setIsSuccessOpen(false)}
+        onTrackOrder={(id, email) => {
+          setIsSuccessOpen(false);
+          setTrackingInitialId(id);
+          setTrackingInitialVerify(email);
+          setIsTrackingOpen(true);
+        }}
+      />
+
+      {/* Customer-Facing Order Tracking Modal */}
+      <OrderTrackingModal
+        isOpen={isTrackingOpen}
+        onClose={() => setIsTrackingOpen(false)}
+        initialTrackingId={trackingInitialId}
+        initialVerify={trackingInitialVerify}
+      />
+
+      {/* Staff Administrative Orders Portal Modal */}
+      <AdminOrdersModal
+        isOpen={isAdminOpen}
+        onClose={() => setIsAdminOpen(false)}
+      />
 
       {/* Direct WhatsApp Widget */}
       <FloatingWhatsApp />

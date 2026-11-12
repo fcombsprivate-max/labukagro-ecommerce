@@ -14,6 +14,7 @@ export default function CheckoutModal() {
 
   const [step, setStep] = useState('form'); // 'form' or 'success'
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -33,24 +34,70 @@ export default function CheckoutModal() {
   const shippingCostNGN = formData.shippingMethod === 'express' ? 4500 : (formData.shippingMethod === 'pickup' ? 0 : 2500);
   const grandTotalNGN = finalTotalNGN + shippingCostNGN;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setErrorMessage('');
 
-    setTimeout(() => {
-      const generatedOrder = {
-        orderId: `LAB-${Math.floor(100000 + Math.random() * 900000)}`,
-        date: new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }),
-        items: [...cart],
-        customer: { ...formData },
-        totalNGN: grandTotalNGN
+    try {
+      const payload = {
+        customer: {
+          fullName: formData.fullName,
+          email: formData.email,
+          phone: formData.phone,
+          address: formData.address,
+          city: formData.city,
+          state: formData.state,
+          shippingMethod: formData.shippingMethod
+        },
+        items: cart.map(item => ({
+          productId: item.product.id,
+          size: item.variant.size,
+          quantity: item.quantity
+        })),
+        shippingMethod: formData.shippingMethod,
+        paymentMethod: formData.paymentMethod
       };
 
-      setOrderSummary(generatedOrder);
+      const res = await fetch('/api/payment/initialize', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      const data = await res.json();
+
+      if (!res.ok || !data.success) {
+        throw new Error(data.message || 'Failed to initialize payment.');
+      }
+
+      if (formData.paymentMethod === 'paystack' && data.authorizationUrl) {
+        // Clear cart and redirect to Paystack hosted checkout
+        clearCart();
+        window.location.href = data.authorizationUrl;
+        return;
+      }
+
+      // If bank transfer or fallback
+      if (formData.paymentMethod === 'bank') {
+        const generatedOrder = {
+          orderId: data.orderReference,
+          date: new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }),
+          items: [...cart],
+          customer: { ...formData },
+          totalNGN: data.grandTotalNGN,
+          bankDetails: data.bankDetails
+        };
+        setOrderSummary(generatedOrder);
+        setIsSubmitting(false);
+        setStep('success');
+        clearCart();
+      }
+    } catch (err) {
+      console.error('Checkout error:', err);
+      setErrorMessage(err.message || 'Unable to process checkout. Please try again.');
       setIsSubmitting(false);
-      setStep('success');
-      clearCart();
-    }, 900);
+    }
   };
 
   return (
@@ -313,6 +360,12 @@ export default function CheckoutModal() {
                 </div>
               </div>
 
+              {errorMessage && (
+                <div className="p-3.5 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs">
+                  {errorMessage}
+                </div>
+              )}
+
               {/* Submit Button with Loading State */}
               <button
                 type="submit"
@@ -322,10 +375,12 @@ export default function CheckoutModal() {
                 {isSubmitting ? (
                   <>
                     <Loader2 className="w-4 h-4 animate-spin" strokeWidth={2} />
-                    <span>Processing Farm Dispatch...</span>
+                    <span>{formData.paymentMethod === 'paystack' ? 'Connecting to Paystack Secure Checkout...' : 'Processing Order...'}</span>
                   </>
                 ) : (
-                  <span>Place Order • <span className="tabular-nums">{formatPrice(grandTotalNGN)}</span></span>
+                  <span>
+                    {formData.paymentMethod === 'paystack' ? 'Pay via Paystack' : 'Place Order'} • <span className="tabular-nums">{formatPrice(grandTotalNGN)}</span>
+                  </span>
                 )}
               </button>
 
