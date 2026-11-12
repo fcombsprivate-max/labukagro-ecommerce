@@ -28,7 +28,7 @@ export default function HealthRemediesGallery() {
   ];
 
   return (
-    <section className="py-12 sm:py-16 lg:py-20 bg-[#faf9f5] border-b border-[#e5e1d5]">
+    <section className="py-12 sm:py-16 lg:py-20 bg-transparent border-b border-[#e5e1d5]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-12 space-y-2.5 sm:space-y-3">

@@ -4,7 +4,7 @@ import { CheckCircle2, Factory, MapPin, Calendar, Droplets, Leaf, Package } from
 
 export default function AboutSection() {
   return (
-    <section id="about" className="py-12 sm:py-16 lg:py-20 bg-white border-b border-[#e5e1d5]">
+    <section id="about" className="py-12 sm:py-16 lg:py-20 bg-transparent border-b border-[#e5e1d5]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Story Section */}

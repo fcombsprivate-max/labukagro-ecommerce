@@ -32,7 +32,7 @@ export default function ProductCatalog({ searchTerm, activeCategory, setActiveCa
   }, [searchTerm, activeCategory, sortBy]);
 
   return (
-    <section id="shop" className="py-12 sm:py-16 lg:py-20 bg-[#faf9f5] border-b border-[#e5e1d5]">
+    <section id="shop" className="py-12 sm:py-16 lg:py-20 bg-transparent border-b border-[#e5e1d5]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Heading: Specific, Balanced & Clean */}

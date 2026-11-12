@@ -80,7 +80,7 @@ function StoreLayout() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#faf9f5] text-stone-900 relative w-full overflow-x-hidden">
+    <div className="min-h-screen flex flex-col main-watermark-wrapper text-stone-900 relative w-full overflow-x-hidden">
       {/* Toast Notification: Responsive positioning for mobile & desktop */}
       {toastMessage && (
         <div className="fixed top-16 sm:top-20 left-4 right-4 sm:left-auto sm:right-6 z-50 bg-[#1b4332] text-white px-4 py-3 rounded-2xl shadow-xl border border-emerald-500/30 flex items-center gap-3 animate-in slide-in-from-top-4 duration-300 max-w-sm sm:max-w-md mx-auto sm:mx-0">

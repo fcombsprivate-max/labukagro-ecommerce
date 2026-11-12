@@ -6,7 +6,7 @@ export default function Hero({ onShopClick, onWholesaleClick }) {
   const { setIsConsultationOpen } = useCart();
 
   return (
-    <section id="hero" className="relative bg-[#faf9f5] pt-8 sm:pt-12 lg:pt-20 pb-12 sm:pb-16 lg:pb-24 border-b border-[#e5e1d5]">
+    <section id="hero" className="relative bg-transparent pt-8 sm:pt-12 lg:pt-20 pb-12 sm:pb-16 lg:pb-24 border-b border-[#e5e1d5]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
           

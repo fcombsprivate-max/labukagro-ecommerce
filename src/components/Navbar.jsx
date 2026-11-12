@@ -15,7 +15,7 @@ export default function Navbar({ searchTerm, setSearchTerm, activeCategory, setA
   };
 
   return (
-    <header className="sticky top-0 z-40 bg-[#faf9f5]/95 backdrop-blur-md border-b border-[#e5e1d5] transition-all">
+    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-[#e5e1d5] transition-all">
       {/* Top Utility Bar */}
       <div className="bg-[#1b4332] text-emerald-100 text-[11px] sm:text-xs py-1.5 sm:py-2 px-3 sm:px-4 font-medium tracking-wide">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-1 text-center sm:text-left">
